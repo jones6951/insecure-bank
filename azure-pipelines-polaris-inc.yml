@@ -15,12 +15,13 @@ steps:
       export SYSTEM_PULLREQUEST_TARGETBRANCHNAME="${SYSTEM_PULLREQUEST_TARGETBRANCH//$REMOVE/}"
       export CHANGE_SET=$(git --no-pager diff origin/master --name-only)
       export CHANGE_SET=src/main/java/org/hdivsamples/controllers/AdminController.java
+      echo $CHANGE_SET>incremental-files.txt
       export POLARIS_FF_ENABLE_COVERITY_INCREMENTAL=true
       export POLARIS_ACCESS_TOKEN=nusqf489ud7f354ua4j45auedci7j6cajba1pu8ogrtb1dn5iusg
       echo Change Set is [$CHANGE_SET]
       wget -q https://sipse.polaris.synopsys.com/api/tools/polaris_cli-linux64.zip
       unzip -j polaris_cli-linux64.zip -d /tmp
       /tmp/polaris -c polaris-inc.yml install
-      /tmp/polaris -c polaris-inc.yml analyze -w --incremental $CHANGE_SET
+      /tmp/polaris -c polaris-inc.yml analyze -w --incremental incremental-files.txt
 
 
