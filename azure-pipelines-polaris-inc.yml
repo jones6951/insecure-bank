@@ -2,7 +2,9 @@ trigger:
 - master
 
 pool:
-  vmImage: ubuntu-latest
+  name: MyAgentPool
+  demands:
+  - agent.name -equals nuc
   
   variables:
     - name: MAIN_BRANCHES
